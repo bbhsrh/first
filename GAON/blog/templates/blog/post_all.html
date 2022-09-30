@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+
+{% block title %}당근🥕|동네소식{% endblock %}
+
+{% block extra-style %}
+<style>
+    .btn-outline-orange:hover {
+        color: #fff;
+        background-color: #ff7c36;
+        border-color: #ff7c36
+    }
+    #hot-articles-navigation {
+        width: 980px;
+        margin: 0 auto;
+        text-align: right;
+        margin-bottom: 30px;
+    }
+    h1 {
+        text-align: center;
+    }
+    .head-title {
+        font-size: 32px;
+        font-weight: 700;
+        letter-spacing: -0.6px;
+        text-align: center;
+        color: #212529;
+        margin-bottom: 40px;
+    }
+    tbody tr:hover {
+        background-color: #FFB98B;
+    }
+
+</style>
+{% endblock %}
+
+{% block content %}
+    <h1 class="head-title">동네 생활 커뮤니티</h1>
+
+    <nav id="hot-articles-navigation">
+        <a href="{% url 'blog:town' %}" class="btn btn-outline-dark btn-outline-orange">동네별 소식보기</a>
+        {% if user.is_active %}
+            <a href="{% url 'blog:add' %}" class="btn btn-outline-dark btn-outline-orange">새소식등록</a>
+            <a href="{% url 'blog:change' %}" class="btn btn-outline-dark btn-outline-orange">내가 쓴 소식</a>
+        {% else %}
+            <a href="{% url 'login' %}" class="btn btn-outline-dark btn-outline-orange">새소식등록</a>
+        {% endif %}
+    </nav>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">동네</th>
+                <th scope="col">제목</th>
+                <th scope="col">부제목</th>
+                <th scope="col">글쓴이</th>
+                <th scope="col">날짜</th>
+                <th scope="col"><i class="fa-sharp fa-solid fa-comment-smile" style="color: #fff;"></i><i class="fa-solid fa-comment"></i></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for post in posts %}
+            <tr>
+                <th scope="row">{{ post.id }}</th>
+                <td>{{ post.town }}</td>
+                <td><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></td>
+                <td>{{ post.description }}</td>
+                <td>{{ post.owner }}</td>
+                <td>{{ post.modify_dt | timesince:today }}</td>
+                <td>n</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+
+    <br>
+
+    <div>
+        <span>
+            {% if page_obj.has_previous %}
+                <a href="?page={{ page_obj.previous_page_number }}">이전글</a>
+            {% endif %}
+
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">다음글</a>
+            {% endif %}
+        </span>
+    </div>
+
+    <div>
+        <a href="{% url 'blog:town' %}">동네별로 보기</a>
+        
+    </div>
+    
+{% endblock %}

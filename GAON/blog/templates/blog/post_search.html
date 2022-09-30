@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %}당근🥕|동네소식검색{% endblock %}
+
+{% block extra-script %}
+<style>
+    .head-title {
+        font-size: 32px;
+        font-weight: 600;
+        letter-spacing: -0.6px;
+        text-align: center;
+        color: #212529;
+        margin-bottom: 40px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+
+    <h1 class="head-title">동네소식 궁금한거 못참아</h1>
+
+    <form method="post">{% csrf_token %}
+        {{ form.as_table }} 
+        <input type="submit" value="Submit" class="btn btn-primary btn-sm">
+    </form>
+    <br>
+    {% if object_list %}
+        <b><i>{{ search_term }}에 관한 검색결과</i></b>
+
+        {% for post in object_list %}
+        <h3><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
+        {{ post.modify_dt|date:"N d, Y" }}
+        <p>{{ post.description }}</p>       
+        {% endfor %}
+    
+    {% elif search_term %}
+        <b><i>Search Word({{ search_term }}) Not Found !</i></b>
+    
+    {% else %}
+        <b>검색을 해보세요</b>
+    {% endif %}
+
+
+{% endblock %}

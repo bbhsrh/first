@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+{% block title %}당근🥕|동네별소식{% endblock %}
+
+{% block extra-style%}
+<style>
+    .head-title {
+        font-size: 32px;
+        font-weight: 600;
+        letter-spacing: -0.6px;
+        text-align: center;
+        color: #212529;
+        margin-bottom: 40px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+
+    <h1 class="head-title">우리 동네 소식</h1>
+
+    <form method="post">{% csrf_token %}
+        {{ form.as_table }} 
+        {{ region_list }}
+        <input type="submit" value="Submit" class="btn btn-outline-light btn-outline-dark btn-sm">
+    </form>
+
+    <div class="">
+        {% for object in object_list %}
+        <h3><a href="{{ post.get_absolute_url }}">{{ object.title }}</a></h3>
+        {{ object.modify_dt|date:"N d, Y" }}
+        <p>{{ object.owner }}</p>     
+        {% endfor %}
+    </div>
+
+
+{% endblock %}

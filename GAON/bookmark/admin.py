@@ -1,0 +1,8 @@
+from django.contrib import admin
+from bookmark.models import Bookmark #[주의] ch99. 제거
+
+# Register your models here.
+@admin.register(Bookmark) #테이블 등록
+class BookmarkAdmin(admin.ModelAdmin):
+    list_display = ('id', 'title', 'url') #보여줄 컬럼 지정
+

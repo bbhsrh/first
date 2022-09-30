@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+<!-- 제목 블록 Start (기본값 My Blog Page) -->
+{% block title %}
+album_detail.html   
+{% endblock %}
+
+<!-- 스타일 블록 Start -->
+{% block extra-style %}
+<style>
+    .photo-hover:hover {
+        transform: scale(0.9);
+    }
+</style>
+{% endblock %}
+
+<!-- 콘텐츠 블록 Start -->
+{% block content %}
+
+    <h1> {{ object.region1 }} {{ object.region2 }} 동네 중고상품 </h1>
+    동네 설명 : {{ object.description }} <br>
+    <h6>중고상품들 : </h6> 
+        <div class="ml-3 row">
+            {% for photo in object.photo_set.all %}
+            <div class="col-md-3 mb-5">
+                <a href="{{ photo.get_absolute_url }}" class="btn photo-hover">
+                    <img src="{{ photo.image.thumb_url }}" alt="{{ photo }}">
+                </a><br>
+                <ul>
+                    <li>{{ photo }}</li>
+                    <li>{{ photo.upload_dt }}</li>
+                    <li>{{ photo.owner }}</li>
+                </ul>
+            </div>
+            {% endfor %}
+        </div>
+{% endblock %}
+
+<!-- 스크립트 블록 Start -->
+{% block extra-script %}
+{% endblock %}
+

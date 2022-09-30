@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+<!-- 제목 블록 Start (기본값 My Blog Page) -->
+{% block title %}
+당근🥕|중고상품 수정{% endblock %}
+<!-- 제목 블록 End -->
+
+<!-- 스타일 블록 Start -->
+{% block extra-style %}
+{% endblock %}
+<!-- 스타일 블록 End -->
+
+<!-- 콘텐츠 블록 Start -->
+{% block content %}
+    <h1>중고상품 Change - {{user}}</h1>
+
+    <table class="table table-striped table-bordered table-condensed">
+
+        <thead>
+            <tr class="table-info">
+                <th>Region</th>
+                <th>Title</th>
+                <th>Price</th>
+                <th>Description</th>
+                <th>Owner</th>
+                <th>Update</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for item in object_list %}
+            <tr>
+                <td>{{ item.region1 }} {{ item.region2 }}</td>
+                <td>{{ item.title }}</td>
+                <th>{{ item.price }}</th>
+                <td>{{ item.description }}</td>
+                <td>{{ item.owner }}</td>
+                <td><a href="{% url 'photo:photo_update' item.id %}">Update</a></td>
+                <td><a href="{% url 'photo:photo_delete' item.id %}">Delete</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+
+    </table>
+{% endblock %}
+<!-- 콘텐츠 블록 End -->
+
+<!-- 스크립트 블록 Start -->
+{% block extra-script %}
+
+{% endblock %}
+<!-- 스크립트 블록 End -->

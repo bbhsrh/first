@@ -1,0 +1,151 @@
+{% extends 'base.html' %}
+{% load humanize %}
+
+<!-- {% load widget_tweaks %} -->
+
+<!-- 제목 블록 Start (기본값 My Blog Page) -->
+{% block title %}
+당근🥕|중고거래{% endblock %}
+
+<!-- 스타일 블록 Start -->
+{% block extra-style %}
+<style>
+    .photo-hover:hover {
+        transform: scale(1.1);
+    }
+    .head-title {
+        font-size: 32px;
+        font-weight: 600;
+        letter-spacing: -0.6px;
+        text-align: center;
+        color: #212529;
+        margin-bottom: 40px;
+    }
+    #hot-articles-navigation {
+        width: 980px;
+        margin: 0 auto;
+        text-align: right;
+        margin-bottom: 30px;
+    }
+    .cards-wrap {
+        width: 980px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        width: 100%;
+        margin: 0 auto;
+    }
+    .card-top {
+        width: calc(25% - 44px);
+        margin-right: 44px;
+        margin-bottom: 56px;
+    }
+    .cards-wrap .card-link {
+        text-decoration: none;
+        color: #212529;
+    }
+    .cards-wrap .card-top .card-photo {
+        width: 100%;
+        padding-top: 100%;
+        position: relative;
+        overflow: hidden;
+        border-radius: 12px;
+        background-color: #F8F9FA;
+        box-shadow: inset 0px 0px 0px 1px rgba(0, 0, 0, 0.15);
+        box-sizing: border-box;
+    }
+    .cards-wrap .card-top .card-photo img{
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+        box-sizing: border-box;
+        border-radius: 12px;
+        border: 1px solid transparent;
+    }
+    .cards-wrap .card-top .card-desc {
+        margin-top: 12px;
+    }
+    .cards-wrap .card-top .card-desc .card-title {
+        font-size: 16px;
+        letter-spacing: -0.02px;
+        color: #212529;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        margin-bottom: 4px;
+        line-height: 1.5;
+        font-weight: normal;
+    }
+    .cards-wrap .card-top .card-desc .card-price {
+        font-size: 15px;
+        font-weight: 700;
+        line-height: 1.5;
+        margin-bottom: 4px;
+    }
+    .cards-wrap .card-top .card-desc .card-region-name {
+        font-size: 13px;
+        color: #212529;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        margin-bottom: 4px;
+        line-height: 1.5;
+    }
+    .cards-wrap .card-top .card-desc .card-counts {
+        color: #868e96;
+        font-size: 13px;
+    }
+
+    .btn-outline-orange:hover {
+        color: #fff;
+        background-color: #ff7c36;
+        border-color: #ff7c36
+    }
+</style>
+{% endblock %}
+
+<!-- 콘텐츠 블록 Start -->
+{% block content %}
+
+    <h1 class="head-title"> 중고거래 인기매물 </h1>
+    <nav id="hot-articles-navigation">
+
+        {% if user.is_active %}
+            <a href="{% url 'photo:photo_add' %}" class="btn btn-outline-dark btn-outline-orange">등록하기</a>
+            <a href="{% url 'photo:photo_change' %}" class="btn btn-outline-dark btn-outline-orange">내상품보기</a>
+        {% else %}
+            <a href="{% url 'login' %}" class="btn btn-outline-dark btn-outline-orange">등록하기</a>
+        {% endif %}
+    </nav>
+        <section class="cards-wrap">
+            {% for object in object_list %}
+                <article class="card-top ">
+                    <a class="card-link " href="{{ object.get_absolute_url }}">
+                        <div class="card-photo ">
+                            <img alt="{{ photo }}" src="{{ object.image.thumb_url }}">
+                        </div>
+                        <div class="card-desc">
+                        <h2 class="card-title">{{ object.title }}</h2>
+                        <div class="card-price ">
+                            {{object.price|intcomma}}원
+                        </div>
+                        <div class="card-region-name">
+                            {{ object.region1 }} {{ object.region2 }}
+                        </div>
+                        <div class="card-counts">
+                            <span>관심 n</span> ∙ <span>채팅 n</span>
+                        </div>
+                        </div>
+                    </a>
+                </article>
+            {% endfor %}
+        </section>
+
+{% endblock %}
+
+<!-- 스크립트 블록 Start -->
+{% block extra-script %}
+{% endblock %}
+

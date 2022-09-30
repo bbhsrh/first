@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}장고네 집{% endblock %}
+
+{% block extra-style %}
+    <style type="text/css">
+        .home-image {
+            background-image: url("https://scontent-gmp1-1.xx.fbcdn.net/v/t1.6435-9/180065330_2904995319713891_3514262188074743253_n.png?_nc_cat=110&ccb=1-7&_nc_sid=e3f864&_nc_ohc=U5you8GoXycAX_5Rbvn&_nc_ht=scontent-gmp1-1.xx&oh=00_AT_qXO3QroJ0k2uRs6IGwPFIA6P9Xb7TsPLsAM6uUlVFXQ&oe=634A39A2");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 100%;
+            height: 500px;
+            padding: 20px 0 0 20px;
+        }
+        .title {
+            color: #ccc;
+            font-weight: bold;
+        }
+        .powered {
+            position: relative;
+            top: 77%;
+            color: #ccc;
+            font-style: italic;
+        }
+        .bg-primary {
+            color: #5fb89c;
+        }
+
+    </style>
+{% endblock %}
+
+{% block content %}
+    <ol>
+        <h2>home</h2>
+        <div>
+            <ul>
+                <li>당근마켓</li>
+                <li>동네생활(post)</li>
+                <li>동네가게(당근마켓이랑 비슷)(지도 연결하면 재미있겠는데...</li>
+            </ul>
+            </div>
+        <li>채팅</li>
+
+        <li>중고상품 - 행정동 별</li>
+        <li>동네가게</li>
+        <li>인기검색어</li>
+        <li>검색</li>
+    </ol>    
+    <div class="home-image">
+
+    </div>
+
+    <hr style="margin: 10px 0;">
+
+    <div class="row text-center">
+        <div class="col-sm-6">
+            <h3>Bookmark App</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat rem voluptates voluptatibus, adipisci totam quod quas voluptatem iure possimus odio quidem nisi minus autem omnis error mollitia maiores aspernatur inventore.</p>
+        </div>
+        <div class="col-sm-6">
+            <h3>Blog App</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur modi aperiam neque incidunt quibusdam, sint adipisci laborum vel ut cumque? Voluptatibus ratione sapiente consequuntur alias ut ab magni culpa nostrum?</p>
+        </div>  
+    </div>
+    <div>
+        <h1>API 사용하기</h1>
+        {{ boxOfficeResult }}
+    
+    </div>
+    
+{% endblock %}
+
+{% block footer %}
+    <footer class="fixed-bottom bg-info">
+        <div class="text-white font-italic text-right mr-5">Copyright &copy; 2019 DjangoBook by shkim</div>
+    </footer>
+{% endblock %}

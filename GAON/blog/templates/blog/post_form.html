@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+<!-- 제목 블록 Start (기본값 My Blog Page) -->
+{% block title %}
+당근🥕|동네소식전하기
+{% endblock %}
+<!-- 제목 블록 End -->
+
+<!-- 스타일 블록 Start -->
+{% block extra-style %}
+{% endblock %}
+<!-- 스타일 블록 End -->
+
+<!-- 콘텐츠 블록 Start -->
+{% block content %}
+    <h1>Post Create/Update - {{user}}</h1>
+    <p class="font-italic">게시물을 생성하거나 수정을 할 수 있습니다.</p>
+
+    {% if form.errors %}
+    <div class="alert alert-danger">
+        <div class="font-weight-bold">Wrong! Please correct the error(s) below.</div>
+        {{ form.errors }}
+    </div>
+    {% endif %}
+
+    <form action="." method="post" class="card pt-3"> {% csrf_token %}
+
+        <div class="form-group row">
+            {{ form.town|add_label_class:"col-form-label col-sm-2 ml-3 font-weight-bold" }}
+            <div class="col-sm-5">
+                {{ form.town|add_class:"form-control"}}
+            </div>
+        </div>
+
+        <div class="form-group row">
+            {{ form.title|add_label_class:"col-form-label col-sm-2 ml-3 font-weight-bold" }}
+            <div class="col-sm-5">
+                {{ form.title|add_class:"form-control"|attr:"autofocus" }}
+            </div>
+        </div>
+<!-- 
+        <div class="form-group row">
+            {{ form.slug|add_label_class:"col-form-label col-sm-2 ml-3 font-weight-bold" }}
+            <div class="col-sm-5">
+                {{ form.slug|add_class:"form-control"|attr:"readonly" }}
+            </div>
+            <small class="form-text text-muted">{{ form.slug.help_text }}</small>
+        </div> -->
+
+        <div class="form-group row">
+            {{ form.description|add_label_class:"col-form-label col-sm-2 ml-3 font-weight-bold" }}
+            <div class="col-sm-5">
+                {{ form.description|add_class:"form-control" }}
+            </div>
+            <small class="form-text text-muted">{{ form.description.help_text }}</small>
+        </div>
+
+        <div class="form-group row">
+            {{ form.content|add_label_class:"col-form-label col-sm-2 ml-3 font-weight-bold" }}
+            <div class="col-sm-8">
+                {{ form.content|add_class:"form-control" }}
+            </div>
+        </div>
+
+        <div class="form-group row">
+            {{ form.tags|add_label_class:"col-form-label col-sm-2 ml-3 font-weight-bold" }}
+            <div class="col-sm-5">
+                {{ form.tags|add_class:"form-control" }}
+            </div>
+            <small class="form-text text-muted">{{ form.tags.help_text }}</small>
+        </div>
+
+        <div class="form-group">
+            <div class="offset-sm-2 col-sm-5">
+                <input type="submit" value="Submit" class="btn btn-info" />
+            </div>
+        </div>
+
+    </form>
+{% endblock %}
+<!-- 콘텐츠 블록 End -->
+
+<!-- 스크립트 블록 Start -->
+{% block extra-script %}
+
+{% endblock %}
+<!-- 스크립트 블록 End -->

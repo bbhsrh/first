@@ -1,0 +1,350 @@
+{% extends 'base.html' %}
+{% load humanize %}
+
+<!-- 제목 블록 Start (기본값 My Blog Page) -->
+{% block title %}
+당근🥕|중고상품 detail{% endblock %}
+
+<!-- 스타일 블록 Start -->
+{% block extra-style %}
+<style>
+
+    #content {
+        margin-top: 60px;
+        padding-bottom: 0;
+    }
+    .hide {
+        position: absolute;
+        left: -9999px;
+        top: -9999px;
+    }
+    #article-images {
+        position: relative;
+        width: 729px;
+        margin: 0 auto;
+    }
+    #image-slider .slider-wrap {
+        position: relative;
+    }
+    #image-slider .slider-wrap .slider {
+        border: none;
+    }
+    .slick-slider {
+        position: relative;
+        display: block;
+        box-sizing: border-box;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        -webkit-touch-callout: none;
+        -khtml-user-select: none;
+        touch-action: pan-y;
+        -webkit-tap-highlight-color: transparent;
+    }
+    .slick-slider .slick-track, .slick-slider .slick-list {
+        transform: translate3d(0, 0, 0);
+        position: relative;
+        display: block;
+        overflow: hidden;
+        margin: 0;
+        padding: 0;
+    }
+    .slick-track {
+        position: relative;
+        top: 0;
+        left: 0;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .slick-slide {
+        display: none;
+        float: left;
+        height: 100%;
+        min-height: 1px;
+    }
+    .slick-slide:focus, .slick-slide a {
+        outline: none;
+    }
+    #image-slider .slider-wrap .image-wrap {
+        position: relative;
+        width: 677px;
+        margin: 0 auto;
+        height: 500px;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+
+
+    #image-slider .slider-wrap .image-wrap .portrait {
+        width: 100%;
+        height: auto;
+    }
+    #image-slider .slider-wrap .image-wrap img {
+        border-radius: 8px;
+        position: relative;
+        min-width: 100%;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        color: transparent;
+        display: block;
+    }
+    #article-profile {
+        width: 677px;
+        margin: 0 auto;
+    }
+    #article-profile #article-profile-link {
+        text-decoration: none;
+        display: block;
+        margin-top: 25px;
+        padding-bottom: 23px;
+        position: relative;
+        border-bottom: 1px solid #e9ecef;
+    }
+    #article-profile .space-between {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    #article-profile #article-profile-image {
+        display: inline-block;
+    }
+    #article-profile #article-profile-left {
+        display: inline-block;
+        margin-left: 8px;
+    }
+    #article-profile #article-profile-left #nickname {
+        font-size: 15px;
+        font-weight: 600;
+        line-height: 1.5;
+        letter-spacing: -0.6px;
+        color: #212529;
+    }
+    #article-profile #article-profile-left #region-name {
+        font-size: 13px;
+        line-height: 1.46;
+        letter-spacing: -0.6px;
+        color: #212529;
+    }
+    #article-profile #article-profile-right {
+        position: absolute;
+        right: 0;
+        padding-right: 36px;
+    }
+    #article-profile #article-profile-right dl {
+        display: block;
+        width: 100px;
+    }
+    #article-profile #article-profile-right dl dt {
+        position: absolute;
+        top: 36px;
+        right: 0px;
+        font-size: 12px;
+        line-height: 1;
+        letter-spacing: -0.6px;
+        color: #868e96;
+    }
+    #article-profile #article-profile-right .text-color-03 {
+        color: #1561a9;
+    }
+    #article-profile #article-profile-right dl dd {
+        position: absolute;
+        font-size: 16px;
+        font-weight: bold;
+        line-height: 1;
+        letter-spacing: -0.5px;
+        color: #212529;
+        margin-top: 1px;
+        width: 100px;
+        text-align: right;
+    }
+    #article-profile #article-profile-right .meters {
+        clear: both;
+        display: block;
+        width: 100px;
+        background-color: #e9ecef;
+        height: 4px;
+        border-radius: 100px;
+        -webkit-border-radius: 100px;
+        -moz-border-radius: 100px;
+        position: relative;
+        vertical-align: middle;
+        margin-top: 24px;
+    }
+    #article-profile #article-profile-right .meters .bar-color-03 {
+        background-color: #1561a9;
+    }
+    #article-profile #article-profile-right .meters .bar {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        background-color: #495057;
+        height: 4px;
+        border-radius: 100px;
+        -webkit-border-radius: 100px;
+        -moz-border-radius: 100px;
+    }
+    #article-profile #article-profile-right .face {
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+    .face-03 {
+        background-position: -0px -75px;
+        width: 24px;
+        height: 24px;
+    }
+    .face-01, .face-02, .face-03, .face-04, .face-05, .face-06, .karrot-symbol {
+        display: inline-block;
+        overflow: hidden;
+        text-indent: -9999px;
+        text-align: left;
+        background: url(https://d1unjqcospf8gs.cloudfront.net/assets/home/articles/face-icon-set-0cffc52be32961b0bb4a308c272d8f526ddcdeda66dbde6eb32618eeb22b74e6.png) no-repeat;
+        background-size: 29px 147px;
+    }
+    #article-description {
+        padding: 32px 0;
+        width: 677px;
+        margin: 0 auto;
+        border-bottom: 1px solid #e9ecef;
+    }
+    #article-description #article-title {
+        margin-top: 16px;
+        font-size: 20px;
+        font-weight: 600;
+        line-height: 1.5;
+        letter-spacing: -0.6px;
+    }
+    #article-description #article-category {
+        margin-top: 4px;
+        font-size: 13px;
+        line-height: 1.46;
+        letter-spacing: -0.6px;
+        color: #868e96;
+    }
+    #article-description #article-price {
+        margin-top: 4px;
+        font-size: 17px;
+        font-weight: 600;
+        line-height: 1.76;
+        letter-spacing: -0.6px;
+    }
+    #article-description #article-detail {
+        margin-bottom: 16px;
+        margin-top: 8px;
+    }
+    #article-description #article-detail p {
+        font-size: 17px;
+        line-height: 1.6;
+        letter-spacing: -0.6px;
+        margin: 16px 0;
+        word-break: break-all;
+    }
+    #article-description #article-counts {
+        font-size: 13px;
+        line-height: 1.46;
+        letter-spacing: -0.6px;
+        color: #868e96;
+    }
+
+
+
+
+</style>
+{% endblock %}
+
+<!-- 콘텐츠 블록 Start -->
+{% block content %}
+<article id="content" data-id="463617428">
+    <h1 class="hide">{{ photo }}</h1>
+    <section id="article-images">
+        <h3 class="hide">이미지</h3>
+        
+        <div id="image-slider">
+            
+            <div class="slider-wrap">
+                
+                <div class="slider slick-initialized slick-slider" data-article-id="463617428">
+                    
+                    <div class="slick-list draggable">
+                        
+                        <div class="slick-track"
+                            style="opacity: 1; width: 729px; transform: translate3d(0px, 0px, 0px);">
+                            <div class="image-wrap" data-image-id="1851644295" data-image-index="1">
+                                <img class="portrait" alt="{{ photo }}" src="{{ photo.image.url }}" style="opacity: 1;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="article-profile">
+        <a id="article-profile-link" href="{% url 'photo:photo_change' %}">
+            <h3 class="hide">프로필</h3>
+            <div class="space-between">
+                <div style="display: flex;">
+                    <div id="article-profile-image">
+                        <img alt="자유"
+                            src="https://d1unjqcospf8gs.cloudfront.net/assets/users/default_profile_80-b61ffca3ea2415f86ca30e1d04c2c480d165fdaf778a82b4ce025b21ac4333a0.png">
+                    </div>
+                    <div id="article-profile-left">
+                        <div id="nickname">{{ photo.owner }}</div>
+                        <div id="region-name">{{ photo.region1}} {{ photo.region2 }}</div>
+                    </div>
+                </div>
+                <div id="article-profile-right">
+                    <dl id="temperature-wrap">
+                        <dt>매너온도</dt>
+                        <dd class="text-color-03 ">
+                            36.5
+                            <span>°C</span>
+                        </dd>
+                    </dl>
+                    <div class="meters">
+                        <div class=" bar bar-color-03" style="width: 37%;"></div>
+                    </div>
+                    <div class=" face face-03"></div>
+                </div>
+            </div>
+        </a>
+    </section>
+
+    <section id="article-description">
+        <h1 property="schema:name" id="article-title" style="margin-top:0px;">{{ photo.title }}</h1>
+        <p id="article-category">
+            category 미정 ∙
+            <time>
+                4일 전
+            </time>
+        </p>
+        <p property="schema:priceValidUntil" datatype="xsd:date" content="2024-09-23">{{ photo.upload_dt }}</p>
+        <p rel="schema:url" resource="https://www.daangn.com/463617428"></p>
+        <p property="schema:priceCurrency" content="KRW"></p>
+        <p id="article-price" property="schema:price" content="1000.0" style="font-size:18px; font-weight:bold;">
+            {{ photo.price|intcomma }}원
+        </p>
+        <div property="schema:description" id="article-detail">
+            <p>{{ photo.description }}</p>
+        </div>
+        <p id="article-counts">
+            관심 2 ∙
+            채팅 46
+            ∙
+            조회 935
+        </p>
+    </section>
+</article>
+
+
+{% endblock %}
+
+<!-- 스크립트 블록 Start -->
+{% block extra-script %}
+{% endblock %}
+
